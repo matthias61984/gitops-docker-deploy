@@ -1,0 +1,7 @@
+name: "Docker Deploy"
+description: "Deploy into Docker container"
+author: "matthias61984@hotmail.com"
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
