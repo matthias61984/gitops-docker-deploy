@@ -13,7 +13,11 @@ namespace DockerDeployDemo.Controllers
     {
         private static readonly string[] Summaries = new[]
         {
+<<<<<<< Updated upstream
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+=======
+            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot"
+>>>>>>> Stashed changes
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
