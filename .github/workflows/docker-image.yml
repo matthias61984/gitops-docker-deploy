@@ -7,17 +7,12 @@ on:
     branches: [ main ]
 
 jobs:
+
   build:
+
     runs-on: ubuntu-latest
+
     steps:
-      - name: ACR Build
-        id: acr
-        uses: ams0/acr-task-github-action@v2
-        with:
-          service_principal: ${{ secrets.ACR_USERNAME }}
-          service_principal_password: ${{ secrets.ACR_PASSWORD }}
-          tenant: ${{ secrets.ACR_TENANT_ID }}
-          registry: pluralsightdemoacr
-          repository: gitopsdockerdeploy
-          folder: ./DockerDeployDemo/
-          dockerfile: DockerDeployDemo/Dockerfile
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build ./DockerDeployDemo/ --file DockerDeployDemo/Dockerfile --tag my-image-name:$(date +%s)
