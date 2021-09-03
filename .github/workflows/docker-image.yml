@@ -7,12 +7,16 @@ on:
     branches: [ main ]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
       run: docker build ./DockerDeployDemo/ --file DockerDeployDemo/Dockerfile --tag my-image-name:$(date +%s)
+    - uses: julioarruda/pushimagetoregistry@v1
+    - name: Push Image to ACR
+      with:
+        acr-tokenname: ${{ secrets.ACR_USERNAME }}
+        acr-token: ${{ secrets.ACR_PASSWORD }}
+        acr-account: pluralsightdemoacr.azurecr.io
+        acr-imagename: pluralsightdemoacr.azurecr.io/gitopsdockerdeploy:v1
