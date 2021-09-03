@@ -20,5 +20,5 @@ jobs:
           username: ${{ secrets.ACR_USERNAME }}
           password: ${{ secrets.ACR_PASSWORD }}
       - run: |
-          docker build . -t pluralsightdemoacr.azurecr.io/gitopsdockerdeploy:${{ github.sha }}
+          run: docker build ./DockerDeployDemo/ --file DockerDeployDemo/Dockerfile --tag my-image-name:$(date +%s)
           docker push pluralsightdemoacr.azurecr.io/gitopsdockerdeploy:${{ github.sha }}
