@@ -1,0 +1,27 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+    
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build ./DockerDeployDemo/ --file DockerDeployDemo/Dockerfile --tag my-image-name:$(date +%s)
+      
+    - uses: azure/docker-login@v1
+    - name: Push the Docker container to ACR
+      with:
+        login-server: pluralsightdemoacr.azurecr.io
+        username: ${{ secrets.ACR_USERNAME }}
+        password: ${{ secrets.ACR_PASSWORD }}
+    - run: |
+        docker build. -t pluralsightdemoacr.azurecr.io/gitopsdockerdeploy:${{ github.sha }}
+        docker push pluralsightdemoacr.azurecr.io/gitopsdockerdeploy:${{ github.sha }}
