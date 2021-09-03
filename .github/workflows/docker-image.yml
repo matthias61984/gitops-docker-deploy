@@ -13,8 +13,9 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build the Docker image
       run: docker build ./DockerDeployDemo/ --file DockerDeployDemo/Dockerfile --tag my-image-name:$(date +%s)
-    - uses: julioarruda/pushimagetoregistry@v1
+    
     - name: Push Image to ACR
+      uses: julioarruda/pushimagetoregistry@v1
       with:
         acr-tokenname: ${{ secrets.ACR_USERNAME }}
         acr-token: ${{ secrets.ACR_PASSWORD }}
