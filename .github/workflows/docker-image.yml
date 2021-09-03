@@ -13,11 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Build the Docker image
-        run: docker build ./DockerDeployDemo/ --file DockerDeployDemo/Dockerfile --tag my-image-name:$(date +%s)
 
       - uses: azure/docker-login@v1
-      - name: Push the Docker container to ACR
         with:
           login-server: pluralsightdemoacr.azurecr.io
           username: ${{ secrets.ACR_USERNAME }}
