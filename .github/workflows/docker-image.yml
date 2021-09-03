@@ -5,20 +5,19 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-    
-  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-
-      - uses: azure/docker-login@v1
+      - name: ACR Build
+        id: acr
+        uses: ams0/acr-task-github-action@v1
         with:
-          login-server: pluralsightdemoacr.azurecr.io
-          username: ${{ secrets.ACR_USERNAME }}
-          password: ${{ secrets.ACR_PASSWORD }}
-      - run: |
-          run: docker build ./DockerDeployDemo/ --file DockerDeployDemo/Dockerfile --tag my-image-name:$(date +%s)
-          docker push pluralsightdemoacr.azurecr.io/gitopsdockerdeploy:${{ github.sha }}
+          service_principal: ${{ secrets.ACR_USERNAME }}
+          service_principal_password: ${{ secrets.ACR_PASSWORD }}
+          tenant: ${{ secrets.ACR_TENANT_ID }}
+          registry: pluralsightdemoacr
+          repository: gitopsdockerdeploy
+          folder: ./DockerDeployDemo/
+          dockerfile: DockerDeployDemo/Dockerfile
