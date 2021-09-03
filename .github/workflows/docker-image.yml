@@ -16,6 +16,7 @@ jobs:
         with:
           service_principal: ${{ secrets.ACR_USERNAME }}
           service_principal_password: ${{ secrets.ACR_PASSWORD }}
+          tenant: ${{ secrets.ACR_TENANT_ID }}
           registry: pluralsightdemoacr
           repository: gitopsdockerdeploy
           folder: ./DockerDeployDemo/
