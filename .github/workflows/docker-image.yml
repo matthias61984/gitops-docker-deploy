@@ -20,4 +20,4 @@ jobs:
         acr-tokenname: ${{ secrets.ACR_USERNAME }}
         acr-token: ${{ secrets.ACR_PASSWORD }}
         acr-account: pluralsightdemoacr.azurecr.io
-        acr-imagename: pluralsightdemoacr.azurecr.io/gitopsdockerdeploy:dev
+        acr-imagename: pluralsightdemoacr.azurecr.io/gitopsdockerdeploy:v1
